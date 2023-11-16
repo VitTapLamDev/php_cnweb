@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 7.6</title>
+    <style>
+        table, tr, td, th{
+            border: 1px solid black;
+        }
+        .table_header{
+            background-color: aqua;
+        }
+        tr:nth-child(even){
+            background-color: #cac6c6;
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        tbody tr:hover{
+            background-color: chartreuse;
+            cursor: pointer;
+        }
+        tr.checked {
+            background-color: #ffff00;
+        }
+    </style>
+</head>
+<body>
+    <table class="table table-bordered">
+        <thead>
+            <tr style="background-color: aqua;">
+                <th><input type="checkbox" name="" id="" onchange="highlightRow(this)"></th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox" name="" id="" onchange="highlightRow(this)"></td>
+                <td>Hoàng Thị Thảo</td>
+                <td>23/06/1990</td>
+                <td>Nữ</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="" id="" onchange="highlightRow(this)"></td>
+                <td>Ngô Mạnh Quân</td>
+                <td>14/4/1992</td>
+                <td>Nam</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="" id="" onchange="highlightRow(this)"></td>
+                <td>Nguyễn Thanh Tùng</td>
+                <td>27/09/1991</td>
+                <td>Nam</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" name="" id="" onchange="highlightRow(this)"></td>
+                <td>Hoàng Thị Ngân</td>
+                <td>23/06/1990</td>
+                <td>Nữ</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const masterCheckbox = checkboxes[0];
+
+    masterCheckbox.addEventListener('change', function () {
+        const isChecked = this.checked;
+        checkboxes.forEach((checkbox, index) => {
+            if (index !== 0) {
+                checkbox.checked = isChecked;
+                toggleRowStyle(checkbox.parentNode.parentNode, isChecked);
+            }
+        });
+    });
+
+    checkboxes.forEach((checkbox, index) => {
+        if (index !== 0) {
+            checkbox.addEventListener('change', function () {
+                toggleRowStyle(this.parentNode.parentNode, this.checked);
+                const allChecked = Array.from(checkboxes).slice(1).every(checkbox => checkbox.checked);
+                masterCheckbox.checked = allChecked;
+            });
+        }
+    });
+
+    function toggleRowStyle(row, isChecked) {
+        if (isChecked) {
+            row.classList.add('checked');
+        } else {
+            row.classList.remove('checked');
+        }
+    }
+</script>
+</html>

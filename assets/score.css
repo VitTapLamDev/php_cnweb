@@ -1,0 +1,15 @@
+body {
+    margin: 200px;
+    padding: 200px;
+}
+
+.container {
+    border: 1px solid black;
+}
+.name {
+    margin-top: 20px;
+}
+
+ul, li {
+    list-style: none;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thực đơn</title>
+    <style>
+        .menu-container {
+            display: flex;
+            align-items: flex-start;
+        }
+        .menu {
+            flex: 1;
+        }
+        .menu-item {
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: #f0f0f0;
+            margin: 2px;
+        }
+        .menu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .selected-menu {
+            background-color: #f0f0f0;
+            flex: 0.5;
+            padding: 1%;
+        }
+        .selected {
+            background-color: #00ff00;
+            color: #ffffff;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <div class="menu-item" id="menu1">Quản Lý cán bộ (Đăng ký thông tin)</div>
+        <div class="menu-item" id="menu2">Phân Quyền</div>
+        <div class="menu-item" id="menu3">Cổng thông tin đào tạo và người học</div>
+        <div class="menu-item" id="menu4">Quản lý văn bản và hồ sơ công việc</div>
+        <div class="menu-item" id="menu5">Hành chính công</div>
+        <div class="menu-item" id="menu4">Hệ thống thông tin báo cáo</div>
+    </div>
+    <div class="selected-menu">
+        <p id="selected-menu">Chưa chọn mục nào.</p>
+    </div>
+
+</body>
+    <script>
+        const menuItems = document.querySelectorAll('.menu-item');
+        const selectedMenuInfo = document.getElementById('selected-menu');
+
+        menuItems.forEach((menuItem) => {
+            menuItem.addEventListener('mouseenter', () => {
+                menuItem.style.backgroundColor = '#ffff00';
+            });
+
+            menuItem.addEventListener('mouseleave', () => {
+                menuItem.style.backgroundColor = '';
+            });
+
+            menuItem.addEventListener('click', () => {
+                menuItems.forEach((item) => {
+                    item.classList.remove('selected');
+                });
+                menuItem.classList.add('selected');
+                selectedMenuInfo.textContent = `${menuItem.textContent}`;
+            });
+        });
+
+
+    </script>
+</html>

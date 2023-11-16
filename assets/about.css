@@ -1,0 +1,40 @@
+.container_header {
+    background-color: aqua;
+    margin-top: 10px;
+    position: relative; 
+}
+
+.container_header > img {
+    position: relative;
+    top: 50px;
+    left: 50px;
+    border: 3px solid blue;
+}
+
+.about_me, .introduce  {
+    position: absolute;
+    top: 50px;
+    left: 30%;
+    width: 75%;
+    color: white;
+}
+
+.container_profile {
+    margin-top: 100px;
+    background-color: none;
+}
+
+ul, li {
+    list-style-type: square;
+}
+
+.working > ul  > li, .prize > ul  > li, .experient > ul > li {
+    list-style: none;
+}
+
+.experient > table > tr {
+    margin-left: 20px;
+}
+.loving > ul > li {
+    list-style-type: initial;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Nhập Liệu LOP</title>
+</head>
+<body>
+    <form id="lop-form" onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <td>
+                    <label for="mahs">Mã học sinh:</label>
+                </td>
+                <td>
+                    <input type="text" id="mahs" name="mahs" maxlength="6" required><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="tenhs">Tên học sinh:</label>
+                </td>
+                <td>
+                    <input type="text" id="tenhs" name="tenhs" maxlength="50" required><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="tenlop">Tên Lớp:</label>
+                </td>
+                <td>
+                    <input type="text" id="tenlop" name="tenlop" maxlength="50" required><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="khoahoc">Khóa Học:</label>
+                </td>
+                <td>
+                    <input type="number" id="khoahoc" name="khoahoc" required><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="gvcn">Giáo Viên Chủ Nhiệm:</label>
+                </td>
+                <td>
+                    <input type="text" id="gvcn" name="gvcn" maxlength="50" required><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Thêm Lớp">
+                </td>
+            </tr>
+        </table>
+        
+
+
+
+
+        
+    </form>
+
+</body>
+<script>
+    function validateForm() {
+        const mahs = document.getElementById('mahs').value;
+        const tenlop = document.getElementById('tenlop').value;
+        const khoahoc = document.getElementById('khoahoc').value;
+        const gvcn = document.getElementById('gvcn').value;
+        if (mahs.length !== 6) {
+            alert('Mã Lớp phải có độ dài 6 ký tự.');
+            return false;
+        }
+    
+        if (tenlop.length > 50) {
+            alert('Tên Lớp không được quá 50 ký tự.');
+            return false;
+        }
+        if (isNaN(khoahoc) || khoahoc <= 0) {
+            alert('Khóa Học phải là số nguyên dương.');
+            return false;
+        }
+        alert('Dữ liệu hợp lệ, có thể thêm lớp.');
+        return true;
+    }
+    
+</script>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bg_aqua {
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <form action="" style="margin: 20px;">
+        <table>
+            <tr>
+                <td><label for="">Họ Tên: </label></td>
+                <td><input class="input-field bg_aqua" id="fullname" type="text" autofocus required></td>
+            </tr>
+            <tr>
+                <td><label for="">Địa chỉ: </label></td>
+                <td><input class="input-field bg_aqua" type="text" id="addresInput"></td>
+            </tr>
+            <tr>
+                <td><label for="" class="">Giới tính: </label></td>
+                <td>
+                    <input class="input-field" type="radio" name="gender" class="me-1" required>Nam
+                    <input class="input-field" type="radio" name="gender" class="me-1" required>Nữ
+                </td>
+            </tr>
+            <tr>
+                <td><label for="">Ngày sinh: </label></td>
+                <td><input class="input-field bg_aqua" id="dobInput" type="text" required></td>
+            </tr>
+            <tr>
+                <td><label for="">Email: </label></td>
+                <td>
+                    <input class="input-field bg_aqua" id="emailinput" type="email" required>
+                    <p id="emailError" style="color: red; display: none;">Email không đúng định dạng.</p>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="">Điện thoại: </label></td>
+                <td><input class="input-field bg_aqua" type="number" required></td>
+            </tr>
+            <tr>
+                <td><label for="">Khóa đăng ký: </label></td>
+                <td>
+                    <input type="checkbox" class="me-1" name="learning" required>Tiếng Anh
+                    <input type="checkbox" class="me-1" name="learning" required>Quản trị
+                    <input type="checkbox" class="me-1" name="learning" required>CNTT
+                </td>
+            </tr>
+            <tr>
+                <td><label for="">Tên sử dụng: </label></td>
+                <td><input class="input-field bg_aqua" type="text" required></td>
+            </tr>
+            <tr>
+                <td><label for="">Mật khẩu:</label></td>
+                <td><input class="input-field bg_aqua" id="passInput" type="password" name="" required></td>
+            </tr>
+            <tr>
+                <td><label for="">Gõ lại mật khẩu: </label></td>
+                <td>
+                    <input class="input-field bg_aqua" id="passConfirm" type="password" name="" required>
+                    <p id="passError" style="color: red; display: none;">Mật khẩu không trùng khớp.</p>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="">Ghi chú:</label></td>
+                <td><textarea name="" id="" cols="40" rows="3"></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" id="submitBtn" value="Chấp nhận">
+                    <input type="button" value="Bỏ qua">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+<script>
+    const inputFields = document.querySelectorAll('.input-field');
+
+    inputFields.forEach((input, index) => {
+        input.addEventListener('keydown', (event) => {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                if (index < inputFields.length - 1) {
+                    inputFields[index + 1].focus(); 
+                }
+            }
+        });
+    });
+
+    const fullNameInput = document.getElementById('fullname');
+
+    fullNameInput.addEventListener('blur', () => {
+        const originalValue = fullNameInput.value;
+        const normalizedValue = normalizeFullName(originalValue);
+        fullNameInput.value = normalizedValue;
+    });
+
+    function normalizeFullName(name) {
+        const words = name.trim().split(/\s+/);
+        const normalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+        return normalizedWords.join(' ');
+    }
+
+    const email_Input = document.getElementById('emailinput');
+    const emailError = document.getElementById('emailError');
+
+    email_Input.addEventListener('input', () => {
+        const email_account = email_Input.value;
+        if(!validateEmail(email_account)){
+            emailError.style.display = 'inline';
+        }else{
+            emailError.style.display = 'none';
+        }
+    });
+
+    function validateEmail (email_check){
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailPattern.test(email_check);
+    }
+
+    const dobInput = document.getElementById('dobInput');
+
+    dobInput.addEventListener('input', () => {
+        let value = dobInput.value.replace(/\D/g, ""); 
+        if (value.length > 2 && value.length < 5) {
+          value = `${value.slice(0, 2)}/${value.slice(2)}`;
+        } else if (value.length >= 5) {
+          value = `${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(4, 8)}`;
+        }
+        dobInput.value = value;
+      });
+
+    const passInput = document.getElementById('passInput');
+    const passConfirm = document.getElementById('passConfirm');
+    const passError = document.getElementById('passError');
+
+    passConfirm.addEventListener('input' , () => {
+        const passInput_value = passInput.value;
+        const passConfirm_value = passConfirm.value;
+
+        if (passConfirm_value !== passInput_value) {
+            passError.style.display = 'inline';
+        }else{
+            passError.style.display = 'none';
+        }
+    });      
+
+</script>
+</html>
